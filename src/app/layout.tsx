@@ -1,18 +1,22 @@
+
 import type {Metadata} from 'next';
-import { GeistSans } from 'geist/font/sans'; // Corrected import for GeistSans
-import { GeistMono } from 'geist/font/mono'; // Corrected import for GeistMono
+// Imports are correct as per Geist documentation (named imports)
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
-const geistSans = GeistSans({ // Use the font object directly
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = GeistMono({ // Use the font object directly
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
+// The 'GeistSans' and 'GeistMono' imported are objects, not functions.
+// We don't need to call them. We use their '.variable' property directly.
+// The following lines, which caused the TypeError, are removed:
+// const geistSans = GeistSans({
+//   variable: '--font-geist-sans',
+//   subsets: ['latin'],
+// });
+// const geistMono = GeistMono({
+//   variable: '--font-geist-mono',
+//   subsets: ['latin'],
+// });
 
 export const metadata: Metadata = {
   title: 'CNPJ Amor - Consulta de CNPJ',
@@ -25,8 +29,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
-      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
+    // Use GeistSans.variable and GeistMono.variable directly.
+    // These properties contain the CSS variable names (e.g., "--font-sans").
+    <html lang="pt-BR" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+      {/*
+        The `font-sans` class on body will utilize the CSS variable defined by GeistSans.variable.
+        The geist-font package is designed so that GeistSans.variable often corresponds to
+        a standard variable name like '--font-sans', which Tailwind's `font-sans` utility
+        then picks up by default.
+      */}
+      <body className={`font-sans antialiased`}>
         {children}
         <Toaster />
       </body>
