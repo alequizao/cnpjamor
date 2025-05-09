@@ -109,7 +109,7 @@ export function CnpjDisplay({ data }: CnpjDisplayProps) {
         {data.email && <DetailItem icon={<Mail size={18} />} label="E-mail" value={<a href={`mailto:${data.email}`} className="text-primary hover:underline">{data.email}</a>} />}
       </CardContent>
 
-      <CardFooter className="p-6 flex flex-col items-start gap-4 bg-gray-50/50 border-t">
+      <CardFooter className="p-6 flex flex-col items-center gap-4 bg-gray-50/50 border-t">
         <Button onClick={handleGenerateSummary} disabled={isLoadingSummary} className="w-full sm:w-auto">
           {isLoadingSummary ? (
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -122,8 +122,8 @@ export function CnpjDisplay({ data }: CnpjDisplayProps) {
         {summary && (
           <Alert variant="default" className="w-full bg-primary/10 border-primary/30">
             <Sparkles className="h-5 w-5 text-primary" />
-            <AlertTitle className="text-primary font-semibold">Resumo do Negócio (IA)</AlertTitle>
-            <AlertDescription className="text-foreground/90">
+            <AlertTitle className="text-primary font-semibold text-center">Resumo do Negócio (IA)</AlertTitle>
+            <AlertDescription className="text-foreground/90 text-center">
               {summary}
             </AlertDescription>
           </Alert>
